@@ -15,34 +15,17 @@ typedef struct Case{
 /* random int between 0 and N : 
  int r = rand() % N;              */
 void Aleatoire_Lecture_Dicto(){
-   
-   FILE *filePointer ; 
+                   
+   FILE *fPointer ; 
       
-    // Declare the variable for the data to be read from file 
-    char le_mot_aléatoire[50]; 
+    
+    char le_mot_aléatoire[9]; 
   
     
     filePointer = fopen("dictionnaire.txt", "r") ; 
-      
-   
-    if ( filePointer == NULL ) 
-    { 
-        printf( "dictionnaire.txt file failed to open." ) ; 
-    } 
-    else
-    { 
-          
-        printf("The file is now opened.\n") ; 
-          
-        // Read the dataToBeRead from the file 
-        //<!> fgets() permet de lire le fichier char par char....
-        while( fgets ( dataToBeRead, 50, filePointer ) != NULL ) 
-        { 
-          
-            // Print the dataToBeRead  
-            printf( "%s" , dataToBeRead ) ; 
-         } 
-          
+    while(!feof(fpointer){                        //permet de lire le fichier ligne par ligne donc mot par mot  !!!!   
+    fgets(le_mot_aléatoire,9,fpointer);
+    puts(le_mot_aléatoire);
          
         fclose(filePointer) ; 
           
