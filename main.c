@@ -33,6 +33,7 @@ void saisir_mot(){
 
 void Matrix(){
     casemot M[7][8];
+    int n;
     
     //
 }
