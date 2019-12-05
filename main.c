@@ -14,7 +14,7 @@ typedef struct Case{
 
 /* random int between 0 and N : 
  int r = rand() % N;              */
-void Aleatoire_Lecture_Dicto(){
+void Aleatoire_Lecture_Dicto(){  
                    
    FILE *fPointer ; 
       
@@ -45,11 +45,18 @@ void saisir_mot(){
 }
 
 
-void Matrix(){
-    casemot M[7][8];
+void Matrice_mot(){  // il faut définir une matrice initiale où les cases ont une couleur NULLE
+    casemot M[7][8];//<!>TO DELETE<!> cette déclaration est erroné pour la corriger:il faut remplir casemot par les éléments M[i][i] telque chaque case ait sa couleur+val 
+    /* à remplacer par*/
+    char M[7][8];// attribution se fera après , c'est comme avoir une matrice de structures...
+    char*mot_aléatoire;
+    for(int i=0;i<7;++i){
+        for(int j=0;i<7;++j){
+            strcopy(M[i][j],*(mot_aléatoire+j));
+            strcpy(casemot.val,M[i][j]);
+            strcpy(casemot.couleur,NULLE);
     
-    
-    //
+                   // toute vérification, attribution de couleur se fait dans cette matrice 
 }
 
 void initialiser_partie(){
