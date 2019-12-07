@@ -44,10 +44,10 @@ void Aleatoire_Lecture_Dicto(){
 
 
           
-void Minuteur(int seconds){
+void Minuteur(int seconds){ // le temps de réflexion en seconds
     int mseconds;
-    mseconds=1000000*seconds;
-    clock_t start=clock();
+    mseconds=1000000*seconds; // la fonction qu'on va employer mesure le temps en Microseconds, d'où la multiplication par 1M
+    clock_t start=clock();    // Cette définition du temps peut varier d'une machine à une autre
     while(clock()<start+mseconds)
   ;
 }
