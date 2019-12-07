@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <time.h>
 
 #define ENTER 13
 
@@ -43,9 +44,13 @@ void Aleatoire_Lecture_Dicto(){
 
 
           
-void  Minuteur(){
-    time.h
-};
+void Minuteur(int seconds){
+    int mseconds;
+    mseconds=1000000*seconds;
+    clock_t start=clock();
+    while(clock()<start+mseconds)
+  ;
+}
 
 bool validate(char *mot){  //cette fonction vérifie le mot saisi dans la grille
     if(strlen(mot)!=9){    //Doit contenir 8 caractères alphabétiques et le caractère ENTER
