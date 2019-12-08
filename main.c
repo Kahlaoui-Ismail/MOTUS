@@ -23,8 +23,8 @@ typedef struct Case{
 
 /* random int between 0 and N : 
  int r = rand() % N;              */
-void Aleatoire_Lecture_Dicto(){  
-                   
+void Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mot n'est pas choisie d'une façon aléatoire
+                  		 //et penser à retourner le mot choisie au lieu d'utiliser VOID.
    FILE *fPointer ; 
       
     
