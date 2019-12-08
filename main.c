@@ -8,14 +8,14 @@
 
 typedef enum {true, false} bool; // On va définir le type booléan pour faciliter la manipulation.
 
-typedef struct Couleur{
-    char couleur[7];
-    //JAUNE,BLUE,ROUGE
-}Clr;
+typedef struct Clr{
+    char* color;
+    //JAUNE,BLUE,ROUGE,GRIS
+}Couleur;
 
 
 typedef struct Case{
-    char val;
+    char* val;
     Couleur c;
 }casemot;
 
@@ -113,36 +113,62 @@ do{
 }                                                     // ENTER dont le code ASCII est 13
 
 
-void Matrice_mot(){  // il faut définir une matrice initiale où les cases ont une couleur NULLE
-    casemot M[7][8];//<!>TO DELETE<!> cette déclaration est erroné pour la corriger:il faut remplir casemot par les éléments M[i][i] telque chaque case ait sa couleur+val 
-    /* à remplacer par*/
-    char M[7][8];// attribution se fera après , c'est comme avoir une matrice de structures...
-    char*mot_aléatoire;
-    for(int i=0;i<7;++i){
-        for(int j=0;i<7;++j){
-            strcopy(M[i][j],*(mot_aléatoire+j));
-            strcpy(casemot.val,M[i][j]);
-            strcpy(casemot.couleur,NULLE);
+casemot** Matrice_mot(){
     
-                   // toute vérification, attribution de couleur se fait dans cette matrice 
+    casemot **M;
+    M = (casemot**)malloc(7*sizeof(casemot*));
+    for (int i = 0 ; i < 7 ; i++){
+        M[i] = (casemot*)malloc(8*sizeof(casemot));
+    }
+        for (int i = 0; i < 7; i++)
+        {
+            for (int j = 0; j < 8; j++){
+                M[i][j].val="."; // Initialisation de la matrice
+                M[i][j].c.color="GRIS";//tous est en gris et contient la
+            }                            // valeur "."
+        }
+    return M;
 }
+
 
 void initialiser_partie(){
     
 }//pour commencer une nouvelle partie une fois le mot en question est trouvé
 
-void check_color_case(){
-     if(lettre_bien_placée()==true){   //Reste  à définir les fonctions suivantes: lettre_bien_placée , lettre_non_existante, mot_trouvé
-        couleur_lettre="rouge";
-    }else{
-        couleur_lettre="jaune";
+void Inserer_mot(int tentative,casemot** M){
+    
+    char *mot_a_trouver=Aleatoire_Lecture_Dicto();
+    char *mot_saisie=saisir_mot();
+    
+    if(tentative==0){
+        M=Matrice_mot();
     }
-    if(lettre_non_existante()==true){
-        couleur_lettre="bleue";}
-    //prend 1 lettre saisie et le mot aléatoire
-    //Attribuer JAUNE SI mal-placée
-    //Attribuer ROUGE SI CORRECTE
-    //Attribuer BLUE SI non existants
+    else if(tentative==7){
+        printf("Vous avez échouée");
+        
+    }
+    else{
+        int casecorrect=0;
+        for(int i=0;i<8;i++){
+            if(mot_a_trouver[i]==mot_saisie[i]){
+                M[tentative][i].val=&mot_saisie[i];
+                M[tentative][i].c.color="ROUGE";
+                casecorrect++;
+            }
+            else if(strstr(mot_a_trouver,&mot_saisie[i])==NULL){//La
+                M[tentative][i].val=&mot_saisie[i]; //lettre n'existe
+                M[tentative][i].c.color="BLUE";//pas dans le mot à
+            }                               //trouver
+            else{
+                M[tentative][i].val=&mot_saisie[i];
+                M[tentative][i].c.color="JAUNE";
+            }
+        }
+        if(casecorrect==8){// à la sortie de la boucle si le nombre
+            printf("Vous avez gagné la partie");//de case coloré en ROUGE
+        } // est égale à 8 -> mot correcte
+    }
+    
 }
 
 void score(){
