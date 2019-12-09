@@ -23,22 +23,23 @@ typedef struct Case{
 
 /* random int between 0 and N : 
  int r = rand() % N;              */
-void Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mot n'est pas choisie d'une façon aléatoire
-                  		 //et penser à retourner le mot choisie au lieu d'utiliser VOID.
+char Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mot n'est pas choisie d'une façon aléatoire
+                  		 //et penser à retourner le mot choisie au lieu d'utiliser VOID. <C'EST REGLE!>
    FILE *fPointer ; 
       
     
-    char le_mot_aléatoire[9]; 
-  
-    
+    char le_mot_aléatoire[8]; 
+    int r = rand() % N; // notre entier aléatoire qui correspond au numéro de la ligne du mot dans le fichier dictionnaire
+    int i;
     filePointer = fopen("dictionnaire.txt", "r") ; 
-    while(!feof(fpointer){                        //permet de lire le fichier ligne par ligne donc mot par mot  !!!!   
-    fgets(le_mot_aléatoire,9,fpointer);
-    puts(le_mot_aléatoire);
-         
+    while(fgets(le_mot_aléatoire,9,fpointer)){                        //permet de lire le fichier ligne par ligne donc mot par mot  !!!!   
+            i++;
+	    if(i==r){
+           printf("%s",le_mot_aléatoire);
+	    }
         fclose(filePointer) ; 
           
-    } 
+    
     return 0;   
           };
 
