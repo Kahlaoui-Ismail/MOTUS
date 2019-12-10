@@ -28,7 +28,7 @@ char Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mo
    int i=1;
    FILE *fptr;
 int r=rand()%10000+clock();
- fptr = fopen("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
+ fptr = fopen("Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
 
        while(!feof(fptr)){
 
