@@ -25,15 +25,19 @@ typedef struct Case{
  int r = rand() % N;              */
 char Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mot n'est pas choisie d'une façon aléatoire
   char*num[9];
-   int i=1;
+int i=1;
    FILE *fptr;
-int r=rand()%10000+clock();
- fptr = fopen("Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
+   int r= lrand48()%(11000+clock());//meilleure densité+ clock() permet d'avoir une nouvelle valeur à chaque clique/compilation sinon on risque d'avoir le même r
+
+
+
+
+   fptr = fopen("/Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
 
        while(!feof(fptr)){
 
 	       i++;
-         
+
          fscanf(fptr,"%s", &num);
 
 
@@ -47,6 +51,7 @@ int r=rand()%10000+clock();
    return 0;
        }
  }
+
 
 
           
