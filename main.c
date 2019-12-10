@@ -27,13 +27,13 @@ char Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mo
   char*num[9];
    int i=1;
    FILE *fptr;
-   int r;
+int r=rand()%10000+clock();
  fptr = fopen("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
 
        while(!feof(fptr)){
 
 	       i++;
-         int r=rand()%11726;
+         
          fscanf(fptr,"%s", &num);
 
 
