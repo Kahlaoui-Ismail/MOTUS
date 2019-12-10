@@ -24,25 +24,29 @@ typedef struct Case{
 /* random int between 0 and N : 
  int r = rand() % N;              */
 char Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mot n'est pas choisie d'une façon aléatoire
-  {
-   char*mot_al[8];
-   int r,i=1;
+  char*num[9];
+   int i=1;
    FILE *fptr;
-   
-   fptr = fopen("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
-       r=rand()@ N  //ici N=11726
+   int r;
+ fptr = fopen("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
+
        while(!feof(fptr)){
+
 	       i++;
-     if(i==r){
+         int r=rand()%11726;
+         fscanf(fptr,"%s", &num);
 
-   fscanf(fptr,"%s", &mot_al);
-   printf("%s\n", mot_al);
-     }
- }
+
+  if(i==r){
+
+   fscanf(fptr,"%s", &num);
+
+   printf("%s\n", num);
+   printf("%d",r);
    fclose(fptr);
-
    return 0;
-}
+       }
+ }
 
 
           
