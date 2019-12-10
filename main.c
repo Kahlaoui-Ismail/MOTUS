@@ -24,24 +24,25 @@ typedef struct Case{
 /* random int between 0 and N : 
  int r = rand() % N;              */
 char Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mot n'est pas choisie d'une façon aléatoire
-                  		 //et penser à retourner le mot choisie au lieu d'utiliser VOID. <C'EST REGLE!>
-   FILE *fPointer ; 
-      
-    
-    char le_mot_aléatoire[8]; 
-    int r = rand() % N; // notre entier aléatoire qui correspond au numéro de la ligne du mot dans le fichier dictionnaire
-    int i;
-    filePointer = fopen("dictionnaire.txt", "r") ; 
-    while(fgets(le_mot_aléatoire,9,fpointer)){                        //permet de lire le fichier ligne par ligne donc mot par mot  !!!!   
-            i++;
-	    if(i==r){
-           printf("%s",le_mot_aléatoire);
-	    }
-        fclose(filePointer) ; 
-          
-    
-    return 0;   
-          };
+  {
+   char*mot_al[8];
+   int r,i=1;
+   FILE *fptr;
+   
+   fptr = fopen("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
+       r=rand()@ N  //ici N=11726
+       while(!feof(fptr)){
+	       i++;
+     if(i==r){
+
+   fscanf(fptr,"%s", &mot_al);
+   printf("%s\n", mot_al);
+     }
+ }
+   fclose(fptr);
+
+   return 0;
+}
 
 
           
