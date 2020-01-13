@@ -23,7 +23,7 @@ typedef struct Case{
 
 /* random int between 0 and N : 
  int r = rand() % N;              */
-char Aleatoire_Lecture_Dicto(){  //Cette fonction est toujours incomplét, le mot n'est pas choisie d'une façon aléatoire
+char Aleatoire_Lecture_Dicto(){  
   char*num[9];
 int i=1;
    FILE *fptr;
@@ -52,6 +52,26 @@ int i=1;
        }
  }
 
+
+************************************
+int best_score(){//cherche dans un fichier le meilleur score enregistré dans les parties précédentes
+  FILE*fscore;
+  fscore=fopen("/Users/soufianehajazi/Desktop/score.txt","r");
+  int max=0;
+  int num;
+  while(!feof(fscore)){
+  fscanf(fscore,"%d", &num);
+
+  if(max<num){
+    max=num;
+  }
+
+
+}
+fclose(fscore);
+return max;
+}
+************************************
 
 
           
