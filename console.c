@@ -13,10 +13,13 @@ int best_score(){ //cherche dans un fichier le meilleur score enregistré dans l
   }
 
 }
-int actual_score(){
 
-  
-}
+  void start_game(){
+    
+    printf("PLEASE CHOOSE THE NUMBER OF WORDS");
+    printf("1) 6letters       2) 7letters     3) 8letters");
+    scanf("%d",&x);
+    
 
 
 
@@ -38,6 +41,7 @@ int main(){
   switch(n){
     case 1:
     printf("**********************WELCOME TO MOTUS*******************");
+      start_game();break;
     
     case 2:
     printf("Your best score is:%d", bestscore());break;
