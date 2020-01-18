@@ -18,26 +18,32 @@ activate (GtkApplication *app,
   GtkWidget *button_box3;
   GtkWidget *button2;
   GtkWidget *button_box2;
+  GtkWidget *pVBox;
+  GtkWidget *image;
+
+GtkWidget *label;
+
+
+
+
+
 
 
   window = gtk_application_window_new (app);
   gtk_window_set_title (GTK_WINDOW (window), "MOTUS");
-  gtk_window_set_default_size (GTK_WINDOW (window), 200, 200);
+  gtk_window_set_default_size (GTK_WINDOW (window), 200, 400);
   gtk_container_set_border_width(GTK_CONTAINER(window), 40);
+
+
+
   button_box = gtk_button_box_new (GTK_ORIENTATION_VERTICAL);
   gtk_container_add (GTK_CONTAINER (window), button_box);
 
+  /* Chargement d'une image a partir d'un fichier */
+  image = gtk_image_new_from_file("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Motus.jpg");
+  gtk_box_pack_start(GTK_BOX(button_box), image, FALSE, FALSE, 5);
 
-  GtkWidget *image;
-  image = gtk_image_new_from_file ("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Motus.jpg");
-  event_box = gtk_event_box_new ();
 
-  gtk_container_add (GTK_CONTAINER (window)), image);
-
-  g_signal_connect (G_OBJECT (event_box),
-                    "button_press_event",
-                    G_CALLBACK (button_press_callback),
-                    image);
 
 
   button1 = gtk_button_new_with_label ("START NEW GAME");
@@ -52,6 +58,11 @@ activate (GtkApplication *app,
   g_signal_connect (button3, "clicked", G_CALLBACK (print_hello), NULL);
   g_signal_connect_swapped (button3, "clicked", G_CALLBACK (gtk_widget_destroy), window);
   gtk_container_add (GTK_CONTAINER (button_box), button3);
+
+  label = gtk_label_new("Game Designed By Hajazi Soufiane & Ismail Kahlaoui\n\n ENSIAS 2019-2020 ");
+
+gtk_label_set_justify(GTK_LABEL(label), GTK_JUSTIFY_CENTER);
+       gtk_container_add(GTK_CONTAINER(button_box), label);
 
   gtk_widget_show_all (window);
 
