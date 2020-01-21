@@ -1,3 +1,11 @@
+//
+//  prototype.c
+//  
+//
+//  Created by ismail on 1/21/20.
+//
+
+#include "prototype.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -21,13 +29,13 @@ typedef struct Case{
 
 
 
-/* random int between 0 and N : 
+/* random int between 0 and N :
  int r = rand() % N;              */
-char Aleatoire_Lecture_Dicto(){  
-  char*num[9];
-int i=1;
-   FILE *fptr;
-   int r= lrand48()%(11000+clock());//meilleure densité+ clock() permet d'avoir une nouvelle valeur à chaque clique/compilation sinon on risque d'avoir le même r
+char* Aleatoire_Lecture_Dicto(){
+    char* num;
+    int i=1;
+    FILE *fptr;
+    int r= lrand48()%(11000+clock());//meilleure densité+ clock() permet d'avoir une nouvelle valeur à chaque clique/compilation sinon on risque d'avoir le même r
 
 
 
@@ -36,77 +44,73 @@ int i=1;
 
        while(!feof(fptr)){
 
-	       i++;
+           i++;
 
-         fscanf(fptr,"%s", &num);
+         fscanf(fptr,"%s", num);
 
 
   if(i==r){
 
-   fscanf(fptr,"%s", &num);
+   fscanf(fptr,"%s", num);
 
    printf("%s\n", num);
    printf("%d",r);
    fclose(fptr);
-   return 0;
+   return num;
        }
  }
-
+    return NULL;
 }
-************************************
-int best_score(){//cherche dans un fichier le meilleur score enregistré dans les parties précédentes
-  FILE*fscore;
-  fscore=fopen("/Users/soufianehajazi/Desktop/score.txt","r");
-  int max=0;
-  int num;
-  while(!feof(fscore)){
-  fscanf(fscore,"%d", &num);
 
-  if(max<num){
-    max=num;
-  }
-
-
+int Best_score(){//cherche dans un fichier le meilleur score enregistré dans les parties précédentes
+    FILE* fscore;
+    fscore=fopen("/Users/soufianehajazi/Desktop/score.txt","r");
+    int max=0;
+    int num;
+    while(!feof(fscore)){
+        fscanf(fscore,"%d", &num);
+        if(max<num){
+          max=num;
+        }
+    }
+    fclose(fscore);
+    return max;
 }
-fclose(fscore);
-return max;
-}
-************************************
+
 
 
           
-void Minuteur(int seconds){ // le temps de réflexion en seconds
+void Timer1(int seconds){ // le temps de réflexion en seconds
     int mseconds;
     mseconds=1000000*seconds; // la fonction qu'on va employer mesure le temps en Microseconds, d'où la multiplication par 1M
     clock_t start=clock();    // Cette définition du temps peut varier d'une machine à une autre
-    while(clock()<start+mseconds)
-  ;
+    while(clock()<start+mseconds);
 }
-/*   AUTRE PROPOSITION POUR LA FONCTION MINUTEUR=> AFFICHE LE NOMBRE DE SECONDES RESTANTES 
+/*   AUTRE PROPOSITION POUR LA FONCTION MINUTEUR=> AFFICHE LE NOMBRE DE SECONDES RESTANTES
 VOID MINUTEUR (){
-	unsigned int x_hours=0;
-	unsigned int x_minutes=0;
-	unsigned int x_seconds=0;
-	unsigned int x_milliseconds=0;
-	unsigned int totaltime=0,count_down_time_in_secs=0,time_left=0;
+    unsigned int x_hours=0;
+    unsigned int x_minutes=0;
+    unsigned int x_seconds=0;
+    unsigned int x_milliseconds=0;
+    unsigned int totaltime=0,count_down_time_in_secs=0,time_left=0;
 
-	clock_t x_startTime,x_countTime;
-	count_down_time_in_secs=20;  // 1 minute is 60, 1 hour is 3600
+    clock_t x_startTime,x_countTime;
+    count_down_time_in_secs=20;  // 1 minute is 60, 1 hour is 3600
 
 
     x_startTime=clock();  // start clock
     time_left=count_down_time_in_secs-x_seconds;   // update timer
 
-	while (time_left>0)
-	{
-		x_countTime=clock(); // update timer difference
-		x_milliseconds=x_countTime-x_startTime;
-		x_seconds=(x_milliseconds/(CLOCKS_PER_SEC))-(x_minutes*60);
-		x_minutes=(x_milliseconds/(CLOCKS_PER_SEC))/60;
-		x_hours=x_minutes/60;
+    while (time_left>0)
+    {
+        x_countTime=clock(); // update timer difference
+        x_milliseconds=x_countTime-x_startTime;
+        x_seconds=(x_milliseconds/(CLOCKS_PER_SEC))-(x_minutes*60);
+        x_minutes=(x_milliseconds/(CLOCKS_PER_SEC))/60;
+        x_hours=x_minutes/60;
         time_left=count_down_time_in_secs-x_seconds; // subtract to get difference
         printf( "\nYou have %d seconds left ( %d )",time_left,count_down_time_in_secs);
-	}
+    }
   
   printf( "\n\n\nTime's out\n\n\n");
   return 0;
@@ -139,7 +143,7 @@ do{
         printf("Faites saisir un mot valide");
         scanf("%s",mot);
         enter=mot[8];
-        }while(enter!=ENTER || validate(mot)==false); //Ne sortir de la boucle que si le mot tapée est valide et que 
+        }while(enter!=ENTER || validate(mot)==false); //Ne sortir de la boucle que si le mot tapée est valide et que
           return mot;                                 //le caractère saisie dans la position 8 est bien le caractère
 }                                                     // ENTER dont le code ASCII est 13
 
@@ -204,7 +208,7 @@ void Inserer_mot(int tentative,casemot** M){
 
 void score(){
     int score_partie=0;
-    if(verifier_existance_dicto(char*mot_inseré)==false){
+    if(verifier_existance_dicto(saisir_mot())==false){
         score_partie-=4;//(-4) for a non existent word
       };
     if(lettre_bien_placée()==true){
@@ -219,16 +223,24 @@ void score(){
         score_partie-=10;
 }
 
-
-boolean verifier_existance_dicto(){
+}
+bool Verifier_existance_dicto(char* mot){
     //parcourir le dictionnaire et vérifier l'existance du mot proposé
-    Non existant = false;
-    existant = true;
+    char* temp;
+    FILE* fp;
+    fp=fopen("Dictionnaire8.txt","r");
+    while(feof(fp)!=0){
+        fscanf(fp,"%s",temp);
+        if(temp==mot){
+            return true;
+        }
+    }
+    return false;
 }
 
 void MENU(){
     // Nouvellepartie(); Initialisation du partie.
-    Minuteur();
+    Timer1(10);
     
     int i=0;
     while(i<7 && motvalide(saisir_mot())){
@@ -236,7 +248,7 @@ void MENU(){
         saisir_mot();
         
         check(Aleatoire_Lecture_Dicto(),saisir_mot());
-        Actualiser score();
+        score();
             }
     i++;
     
@@ -244,8 +256,3 @@ void MENU(){
 
 
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    printf("Hello, World!\n");
-    return 0;
-}
