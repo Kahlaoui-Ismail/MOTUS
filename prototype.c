@@ -1,8 +1,8 @@
 //
 //  prototype.c
-//  
 //
-//  Created by ismail on 1/21/20.
+//
+//  Created on 1/21/20.
 //
 
 #include "prototype.h"
@@ -14,18 +14,6 @@
 
 #define ENTER 13
 
-typedef enum {true, false} bool; // On va définir le type booléan pour faciliter la manipulation.
-
-typedef struct Clr{
-    char* color;
-    //JAUNE,BLUE,ROUGE,GRIS
-}Couleur;
-
-
-typedef struct Case{
-    char* val;
-    Couleur c;
-}casemot;
 
 
 
@@ -33,33 +21,28 @@ typedef struct Case{
  int r = rand() % N;              */
 char* Aleatoire_Lecture_Dicto(){
     char* num;
-    int i=1;
-    FILE *fptr;
-    int r= lrand48()%(11000+clock());//meilleure densité+ clock() permet d'avoir une nouvelle valeur à chaque clique/compilation sinon on risque d'avoir le même r
+    num=(char*)malloc(sizeof(char));
+ 
+    FILE *fp;
+    time_t t;
+    srand((unsigned) time(&t));
+    int rnd =rand()%11726;// 11726 : nombre de mots contenues dans le dictionnaire
 
-
-
-
-   fptr = fopen("/Downloads/motus-master\ 3/Graphique/Dictionnaire8.txt","r");
-
-       while(!feof(fptr)){
-
-           i++;
-
-         fscanf(fptr,"%s", num);
-
-
-  if(i==r){
-
-   fscanf(fptr,"%s", num);
-
-   printf("%s\n", num);
-   printf("%d",r);
-   fclose(fptr);
-   return num;
-       }
- }
-    return NULL;
+    fp=fopen("Dictionnaire8.txt","r");
+    if(fp==NULL){
+        printf("Error! opening file");
+    }
+    else{
+        
+        fseek(fp,9*rnd,SEEK_SET);
+        fscanf(fp,"%s",num);
+        //fscanf(fp,"%s",num);
+        //printf("%s",num);
+        //strcpy(numf,num);
+                
+        }
+    fclose(fp);
+    return num;
 }
 
 int Best_score(){//cherche dans un fichier le meilleur score enregistré dans les parties précédentes
@@ -118,32 +101,33 @@ VOID MINUTEUR (){
 */
 
 
-bool validate(char *mot){  //cette fonction vérifie le mot saisi dans la grille
-    if(strlen(mot)!=9){    //Doit contenir 8 caractères alphabétiques et le caractère ENTER
+bool validate(char *mot,int longeur){  //cette fonction vérifie le mot saisi dans la grille
+    if(strlen(mot)!=longeur){    //Doit contenir 8 caractères alphabétiques et le caractère ENTER
         return false;
     }
     else{
-        for(int i=0;i<strlen(mot)-2;i++){ // On vérifie que le 8 caractères sont alphabétique(la validation du caractère     ENTER
-            if(isalpha(mot[i])==0){       // ENTER se fait dans la fonction saisir_mot()
+        for(int i=0;i<longeur;i++){ // On vérifie que le 8 caractères sont alphabétique(la validation du caractère     ENTER
+            if(isalpha(mot)==0){
+                mot++;// ENTER se fait dans la fonction saisir_mot()
                 return false;
             }
         }
     }
-    return true; //renvoie TRUE si seulement si les 8 caractères sont alphabétiques
+    return true; //renvoie TRUE si seulement si tous les caractères sont alphabétiques
 }
           
-char *saisir_mot(){
+char *saisir_mot(int longeur){
     char *mot ;
-    int enter;
+   // int enter;
     mot=(char *)malloc(sizeof(char));
 
         
 do{
         
-        printf("Faites saisir un mot valide");
+        printf("Faites saisir un mot valide\n");
         scanf("%s",mot);
-        enter=mot[8];
-        }while(enter!=ENTER || validate(mot)==false); //Ne sortir de la boucle que si le mot tapée est valide et que
+       // enter=mot[8];
+        }while( validate(mot,longeur)==false); //Ne sortir de la boucle que si le mot tapée est valide et que
           return mot;                                 //le caractère saisie dans la position 8 est bien le caractère
 }                                                     // ENTER dont le code ASCII est 13
 
