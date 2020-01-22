@@ -1,4 +1,5 @@
 #include <gtk/gtk.h>
+
 static void
 activate (GtkApplication *app,
           gpointer        user_data)
@@ -12,8 +13,7 @@ activate (GtkApplication *app,
   GtkWidget *image;
   GtkWidget *label_1;
   GtkWidget *table;
-  gchar *values[65] = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p",
-"q", "r", "s", "t", "u", "v", "w", "x", "y", "z"};
+  gchar *values[65] = {0};
   GtkWidget *button;
 
 
@@ -29,27 +29,27 @@ activate (GtkApplication *app,
    Tried_word=gtk_entry_new ();
    Go_button= gtk_button_new_with_label ("Go");
    g_signal_connect (Go_button, "clicked", G_CALLBACK (gtk_main_quit), NULL);
-
-  gtk_container_add(GTK_CONTAINER(window), table);
-  gtk_container_add(GTK_CONTAINER(table), Tried_word);
-
-
-   label_1=gtk_label_new("your try:");
-
-
+   label_1=gtk_label_new("TRY YOUR BEST !");
+  box=gtk_box_new(TRUE,2);
+  gtk_box_set_baseline_position (GTK_BOX(box),GTK_BASELINE_POSITION_CENTER);
+  image = gtk_image_new_from_file("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/Motus.jpg");
+  gtk_box_pack_start(GTK_BOX(box), image, TRUE, TRUE, 5);
+gtk_box_pack_start(GTK_BOX(box),label_1,TRUE,TRUE,NULL);
+  gtk_box_pack_start(GTK_BOX(box),Tried_word,TRUE,TRUE,NULL);
+   gtk_box_pack_start (GTK_BOX(box),
+                     Go_button,
+                     TRUE,
+                     TRUE,
+                     NULL);
 
   table = gtk_table_new(8, 8, TRUE);
   gtk_table_set_row_spacings(GTK_TABLE(table), 2);
   gtk_table_set_col_spacings(GTK_TABLE(table), 2);
 
 
-  gtk_table_attach_defaults(GTK_TABLE(table), Tried_word, 9,8,9,9);
-  gtk_table_attach_defaults(GTK_TABLE(table), label_1, 9,8,9,9);
-  gtk_table_attach_defaults(GTK_TABLE(table), Go_button, 9,8,9,9);
 
-
-  int i = 1;
-  int j = 1;
+  int i = 0;
+  int j = 0;
   int pos = 0;
 
   for (i=0; i < 8; i++) {
@@ -61,7 +61,9 @@ activate (GtkApplication *app,
   }
 
 
-gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET (table));
+  /*Be sure to set the initial state of each button*/
+gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(box));
+gtk_container_add (GTK_CONTAINER (box), GTK_WIDGET(table));
   gtk_widget_show_all (window);
 }
 
