@@ -27,6 +27,12 @@ char* Aleatoire_Lecture_Dicto(){
 int Best_score(){//cherche dans un fichier le meilleur score enregistré dans les parties précédentes
 
 }
+ 
+
+void save_score(){// save the score at the end of the game
+}
+
+ 
 
 
 
