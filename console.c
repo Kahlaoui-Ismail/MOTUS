@@ -64,6 +64,7 @@ void Afficher_grille(){
                 }
             }
         }
+      printf("\n");
     }
 }
 
