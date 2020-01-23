@@ -271,7 +271,7 @@ void menu(){
 }
 
 
-void main(){
+int main(){
     int n;
     char** M;
     int tentative=1;
