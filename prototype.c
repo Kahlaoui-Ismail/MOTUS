@@ -190,22 +190,22 @@ void Inserer_mot(int tentative,casemot** M){
     
 }
 
-void score(){
-    int score_partie=0;
-    if(verifier_existance_dicto(saisir_mot())==false){
-        score_partie-=4;//(-4) for a non existent word
-      };
-    if(lettre_bien_placée()==true){
-        score_partie+=2;// !!!!!<?> pour le tableau des scores chaque niveau de difficulté a sa propre notation donc on optera pour la notation du niv facile....
-    }else{
-        score_partie+=1;
-    }
-    if(mot_trouvé()==true){
-        score_partie+=6;
-    }
-    if(mot_déjà_proposé()==true){
-        score_partie-=10;
-}
+////void score(){
+//    int score_partie=0;
+//    if(verifier_existance_dicto(saisir_mot())==false){
+//        score_partie-=4;//(-4) for a non existent word
+//      };
+//    if(lettre_bien_placée()==true){
+//        score_partie+=2;// !!!!!<?> pour le tableau des scores chaque niveau de difficulté a sa propre notation donc on optera pour la notation du niv facile....
+//    }else{
+//        score_partie+=1;
+//    }
+//    if(mot_trouvé()==true){
+//        score_partie+=6;
+//    }
+//    if(mot_déjà_proposé()==true){
+//        score_partie-=10;
+////}
 
 }
 bool Verifier_existance_dicto(char* mot){
@@ -237,6 +237,7 @@ void MENU(){
     i++;
     
 }
+
 
 
 

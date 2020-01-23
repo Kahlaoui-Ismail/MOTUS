@@ -60,7 +60,7 @@ void initialiser_partie(void);
 
 void Inserer_mot(int tentative,casemot** M);
 
-void score(void);
+//void score(void);
 
 bool Verifier_existance_dicto(char* mot);
     //parcourir le dictionnaire et vérifier l'existance du mot proposé
@@ -74,3 +74,4 @@ void MENU(void);
 
 
 #endif /* prototype_h */
+
