@@ -10,6 +10,7 @@ char* Mot_aleatoire;
 
 
 
+
 int best_score(){ //cherche dans un fichier le meilleur score enregistré dans les parties précédentes
   FILE*fscore;
   fscore=fopen("‎⁨/Users/soufianehajazi/Desktop/TP2/TP-structures.c/score.txt","r");
@@ -57,13 +58,13 @@ void Afficher_grille(){
     for(int i=0;i<=9;i++){
         for(int j=0;j<=x+1;j++){
             if(i==0 || i==9){
-                printf("#");//La 1ère et la dernière ligne de la matrice
+                printf("# \t");//La 1ère et la dernière ligne de la matrice
             }
             else{
                 if(j==0 || j==x+1){
-                    printf("#");//Les bordures de la grille
+                    printf("# \t");//Les bordures de la grille
                 }else{
-                    printf("*");//Le contenue de la grille initié par des '*'
+                    printf("* \t");//Le contenue de la grille initié par des '*'
                 }
             }
         }
@@ -115,7 +116,6 @@ bool validate(char *mot,int longeur){  //cette fonction vérifie le mot saisi da
 char *saisir_mot(int longeur){
     char *mot ;
    // int enter;
-    mot=(char *)malloc(sizeof(char));
 
         
 do{
@@ -123,7 +123,7 @@ do{
         printf("Faites saisir un mot valide\n");
         scanf("%s",mot);
        // enter=mot[8];
-        }while( validate(mot,longeur)==false); //Ne sortir de la boucle que si le mot tapée est valide et que
+        }while(strlen(mot)!=longeur); //Ne sortir de la boucle que si le mot tapée est valide et que
           return mot;                                 //le caractère saisie dans la position 8 est bien le caractère
 }                                                     // ENTER dont le code ASCII est 13
 
@@ -140,7 +140,7 @@ char** Initialiser_grille(){
     }
     for (int i = 0; i < 8; i++){
         for (int j = 0; j < x; j++){
-            *(M+i*x+j)="*";//Initialisation de la matrice
+            *(M+i*x+j)='*';//Initialisation de la matrice
         }
     }
     srand((unsigned) time(&t));//Initialisation du générateur des nombres aléatoires
@@ -151,12 +151,10 @@ char** Initialiser_grille(){
         pos[2]=rand()%x;
         for(int i=0;i<x;i++){
             if(i==pos[0] || i==pos[1] || i==pos[2]){
-                *(M+i)=Mot_aleatoire;
-                Mot_aleatoire++;
+                *(M+i)=*(Mot_aleatoire+i);
             }
             else{
-                *(M+i)="*";
-                Mot_aleatoire++;
+                *(M+i)='*';
             }
         }
     }
@@ -165,10 +163,10 @@ char** Initialiser_grille(){
         pos[1]=rand()%x;
         for(int i=0;i<x;i++){
             if(i==pos[0] || i==pos[1]){
-                *(M+i)=&Mot_aleatoire[i];
+                *(M+i)=*(Mot_aleatoire+i);
             }
             else{
-                *(M+i)="*";
+                *(M+i)='*';
             }
         }
     }
@@ -176,25 +174,26 @@ char** Initialiser_grille(){
         pos[0]=rand()%x;
         for(int i=0;i<x;i++){
             if(i==pos[0]){
-                c=Mot_aleatoire[i];
-                *(M+i)=c;
+                *(M+i)=*(Mot_aleatoire+i);
                 //sortir de la boucle à ce niveau.
             }
             else{
-                *(M+i)="*";
+                *(M+i)='*';
             }
         }
     }
     for(int i=0;i<=9;i++){
         for(int j=0;j<=x+1;j++){
             if(i==0 || i==9){
-                printf("#");//La 1ère et la dernière ligne de la matrice
+                printf("# \t");//La 1ère et la dernière ligne de la matrice
             }
             else{
                 if(j==0 || j==x+1){
-                    printf("#");//Les bordures de la grille
+                    printf("# \t");//Les bordures de la grille
                 }else{
-                    printf("%s",*(M+(i-1)*x+(j-1)));//Le contenue de la grille initié par des '*'
+                    c=*(M+(i-1)*x+(j-1));
+                    printf("%c",c);
+                    printf("\t");
                 }
             }
         }
@@ -203,35 +202,61 @@ char** Initialiser_grille(){
     return M;
     
 }
-char** Update_grille(int tentative,char **M){
-
+char** Update_grille(char **M,int tentative){
+    char c;
     char* mot_saisie;
+    mot_saisie=(char*)malloc(x*sizeof(char));
     do{
         mot_saisie=saisir_mot(x);
         for(int i=0;i<9;i++){
-            for(int j=0;j<=x+1;j++){
-                if(i==0 || i==8){
-                    printf("#");//La 1ère et la dernière ligne de la matrice
-                }
-                else if(i==tentative){
-                    if(j==0 || j==x+1){
-                        printf("#");//Les bordures de la grille
-                    }else{
-                        if(mot_saisie[j-1]==Mot_aleatoire[j-1]){
-                            *(M+i*x+j)=&Mot_aleatoire[j-1];
-                            printf("%c",*(M+i*x+j));
-                        }else{
-                            printf("%c",*(M+i*x+j));
-                        }
+            for(int j=0;j<x;j++){
+                if(i==tentative){
+                    if(*(mot_saisie+j)==*(Mot_aleatoire+j)){
+                        *(M+i*x+j)=*(Mot_aleatoire+j);
                     }
-                }else{
-                    printf("%c",*(M+i*x+j));
                 }
             }
-            printf("\n");
+        }
+        
+        for(int i=0;i<=9;i++){
+            for(int j=0;j<=x+1;j++){
+                if(i==0 || i==9){
+                    printf("# \t");//La 1ère et la dernière ligne de la matrice
+                }
+                else{
+                    if(j==0 || j==x+1){
+                        printf("# \t");//Les bordures de la grille
+                    }else{
+                        c=*(M+(i-1)*x+(j-1));
+                        printf("%c",c);
+                        printf("\t");
+                    }
+                }
+            }
+          printf("\n");
+        }
+        for(int i=0;i<x;i++){
+            for(int j=0;j<x;j++){
+                if(*(M+tentative*x+i)!='*'){
+                    break;
+                }
+                else{
+                    if(*(Mot_aleatoire+i)==*(mot_saisie+j)){
+                        printf("La lettre '%c' existe mais mal placée \n",*(Mot_aleatoire+i));
+                        break;
+                    }
+                }
+            }
         }
         tentative++;
-    }while(tentative<8 || strcmp(mot_saisie, Mot_aleatoire)!=0);
+    }while(tentative<8 && strcmp(mot_saisie, Mot_aleatoire)!=0);
+    if(tentative<8){
+        printf("Félicitaion! Vous avez deviné le mot correct");
+    }
+    else{
+        printf("Désolé! Vous n'avez pas deviné le mot correct \n");
+        printf("Le mot correct était %s",Mot_aleatoire);
+    }
     return M;
 }
 
@@ -246,9 +271,10 @@ void menu(){
 }
 
 
-int main(){
+void main(){
     int n;
     char** M;
+    int tentative=1;
   
     
 
@@ -262,14 +288,14 @@ int main(){
           start_game();
           Afficher_grille();
           M=Initialiser_grille();
-          Update_grille(1, M);
+          Update_grille(M,tentative);
       break;
     
     case 2: printf("ur best score: %d",best_score());
    break;
     case 3:break;
     }
-  return 0;
-
 }
+    
+
 
