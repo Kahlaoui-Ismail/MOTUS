@@ -59,12 +59,12 @@ main_game (GtkApplication *app1,
 
 
    Tried_word=gtk_entry_new ();
-   Go_button= gtk_toggle_button_new_with_label("GO");
+   Go_button= gtk_toggle_button_new_with_label(" OK ");
 
-   quit_button= gtk_button_new_with_label ("QUIT THE GAME");
+   quit_button= gtk_button_new_with_label ("Sortir Du Jeu");
    g_signal_connect_swapped(quit_button, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
-   label_1=gtk_label_new("TRY YOUR BEST !");
+   label_1=gtk_label_new("Saisir Votre Mot");
    box=gtk_box_new(TRUE,2);
    gtk_box_set_baseline_position (GTK_BOX(box),GTK_BASELINE_POSITION_CENTER);
    image = gtk_image_new_from_file("/Users/soufianehajazi/Desktop/Screen\ Shot\ 2020-01-23\ at\ 13.00.44.png");
