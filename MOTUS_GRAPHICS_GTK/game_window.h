@@ -97,26 +97,7 @@ main_game (GtkApplication *app1,
       pos++;
     }
   }
-  if(gtk_toggle_button_get_active(Go_button)){
-    int m= 0;
-    int n = 0;
-    int posi = 0;
-    for (m=0; m< 8; m++) {
-      for (n=0; n < 8; n++) {
-        const gchar *word=gtk_entry_get_text (Tried_word);
-        cd=gtk_label_new(*(word+m));
-        gtk_table_attach_defaults(GTK_TABLE(table), cd, m, m+1, n, n+1);
-
-
-        image_yellow_box= gtk_image_new_from_file("/Users/soufianehajazi/Downloads/motus-master\ 3/Graphique/FondMauvaisePos.png");
-        gtk_table_attach_defaults(GTK_TABLE(table), image_yellow_box,  m, m+1, n, n+1);
-
-        gtk_widget_modify_fg (cd, GTK_STATE_NORMAL, &colorRed);
-        posi++;
-      }
-    }
-
-  }
+   
 
   /*Be sure to set the initial state of each button*/
  gtk_container_add (GTK_CONTAINER (window), GTK_WIDGET(box));
