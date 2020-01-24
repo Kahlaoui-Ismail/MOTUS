@@ -27,8 +27,12 @@ static void option(GtkApplication *app2,
   GtkWidget *button_a;
   GtkWidget *button_b;
   GtkWidget *button_c;
+  GtkWidget *button_d;
+  GtkWidget *button_e;
+  GtkWidget *button_f;
   GtkWidget *label_x;
   GtkWidget *label_y;
+  GtkWidget *label_z;
   GtkWidget *app1;
   GtkWidget *grid;
   GtkWidget *box;
@@ -49,13 +53,19 @@ static void option(GtkApplication *app2,
                                                           "7 mots");
 
    /*Create a third button, and add it to the same group as Button 1*/
-   button_c = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (button_a),
+   button_c = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (button_d),
                                                           "8 mots");
-   label_x= gtk_label_new("Choose number of letters of the word : ");//choix nombre de mots
+    button_d= gtk_radio_button_new_with_label (NULL, " facile");
+    button_e = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (button_d),
+                                                           "difficile");
+    button_f = gtk_radio_button_new_with_label_from_widget (GTK_RADIO_BUTTON (button_d),
+                                                                "très difficile");
+   label_x= gtk_label_new("Choisir le nombre de lettres par mot: ");//choix nombre de mots
    label_y= gtk_label_new("Nom du joueur:");
+   label_z=gtk_label_new("Niveau de Difficulté: ");
 
    nom_joueur=gtk_entry_new ();
-   Go_button= gtk_button_new_with_label ("START GAME");
+   Go_button= gtk_button_new_with_label ("JOUER");
    g_signal_connect (Go_button, "clicked", G_CALLBACK (main_game), NULL);
 
 
@@ -66,6 +76,10 @@ static void option(GtkApplication *app2,
    gtk_grid_attach (GTK_GRID (grid), button_a, 1, 0, 1, 1);
    gtk_grid_attach (GTK_GRID (grid), button_b, 2, 0, 1, 1);
    gtk_grid_attach (GTK_GRID (grid), button_c, 3, 0, 1, 1);
+   gtk_grid_attach (GTK_GRID (grid), label_z,  0, 1, 1, 1);
+   gtk_grid_attach (GTK_GRID (grid), button_d, 1, 1, 1, 1);
+   gtk_grid_attach (GTK_GRID (grid), button_e, 2, 1, 1, 1);
+   gtk_grid_attach (GTK_GRID (grid), button_f, 3, 1, 1, 1);
    gtk_grid_attach (GTK_GRID (grid), label_y,  0, 4, 1, 1);
    gtk_grid_attach (GTK_GRID (grid), nom_joueur,  1, 4, 1, 1);
    gtk_grid_attach (GTK_GRID (grid), Go_button,  3, 4, 1, 1);
@@ -77,6 +91,9 @@ static void option(GtkApplication *app2,
    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_a), TRUE);
    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_b), FALSE);
    gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_c), FALSE);
+   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_d), TRUE);
+   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_e), FALSE);
+   gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button_f), FALSE);
 
    /*Connect the signal handlers (aka Callback functions) to the buttons*/
    g_signal_connect (GTK_TOGGLE_BUTTON (button_a), "toggled",
@@ -85,7 +102,12 @@ static void option(GtkApplication *app2,
                      G_CALLBACK (button_toggled_cb), window1);
    g_signal_connect (GTK_TOGGLE_BUTTON (button_c), "toggled",
                      G_CALLBACK (button_toggled_cb), window1);
-
+                     g_signal_connect (GTK_TOGGLE_BUTTON (button_d), "toggled",
+                                       G_CALLBACK (button_toggled_cb), window1);
+                     g_signal_connect (GTK_TOGGLE_BUTTON (button_e), "toggled",
+                                       G_CALLBACK (button_toggled_cb), window1);
+                     g_signal_connect (GTK_TOGGLE_BUTTON (button_f), "toggled",
+                                       G_CALLBACK (button_toggled_cb), window1);
 
 
 
