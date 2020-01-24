@@ -1,6 +1,6 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
-#include "maingame.h"
+
 #include "optionwindow.h"
 
 void show_best_score(GtkWidget *calculate, gpointer data){//shows the best score
@@ -58,16 +58,16 @@ static void activate (GtkApplication *app,
 
 
 
-  button1 = gtk_button_new_with_label ("START NEW GAME");
+  button1 = gtk_button_new_with_label ("NOUVELLE PARTIE");
 
 
   g_signal_connect (button1, "clicked", G_CALLBACK(option), NULL);
   gtk_container_add (GTK_CONTAINER (button_box), button1);
-  button2 = gtk_button_new_with_label ("BEST SCORE");
+  button2 = gtk_button_new_with_label ("MEILLEUR SCORE");
   g_signal_connect (button2, "clicked", G_CALLBACK (show_best_score), NULL);
 
   gtk_container_add (GTK_CONTAINER (button_box), button2);
-  button3 = gtk_button_new_with_label ("QUIT THE GAME");
+  button3 = gtk_button_new_with_label ("SORTIR DU JEU");
   g_signal_connect (button3, "clicked", G_CALLBACK (print_hello), NULL);
   g_signal_connect_swapped (button3, "clicked", G_CALLBACK (gtk_widget_destroy), window);
   gtk_container_add (GTK_CONTAINER (button_box), button3);
