@@ -163,11 +163,11 @@ bool verifier_existance_dicto(char* mot_saisie){
     FILE* fp1;
     char* filename;
     switch(x){
-            case 6 : filename="Dictionnaire6";break;
-            case 7 : filename="Dictionnaire7";break;
-            case 8 : filename="Dictionnaire8";break;
-            case 9 : filename="Dictionnaire9";break;
-            case 10 : filename="Dictionnaire10";break;
+            case 6 : filename="./Dictionnaires/Dictionnaire6.txt";break;
+            case 7 : filename="./Dictionnaires/Dictionnaire7.txt";break;
+            case 8 : filename="./Dictionnaires/Dictionnaire8.txt";break;
+            case 9 : filename="./Dictionnaires/Dictionnaire9.txt";break;
+            case 10 : filename="./Dictionnaires/Dictionnaire10.txt";break;
     }
     fp1=fopen(filename,"r");
     if(fp1==NULL){
@@ -278,6 +278,9 @@ char** Initialiser_grille(){
         for(int j=0;j<=x+1;j++){
             if(i==0 || i==9){
                 printf("# \t");//La 1ère et la dernière ligne de la matrice
+                if(j==x+1 && i==0){
+                    printf("\t Score : %d",score);
+                }
             }
             else{
                 if(j==0 || j==x+1){
@@ -322,6 +325,9 @@ char** Update_grille(char **M,int tentative){
             for(int j=0;j<=x+1;j++){
                 if(i==0 || i==9){
                     printf("# \t");//La 1ère et la dernière ligne de la matrice
+                    if(j==x+1 && i==0){
+                        printf("\t Score : %d",score);
+                    }
                 }
                 else{
                     if(j==0 || j==x+1){
@@ -351,7 +357,7 @@ char** Update_grille(char **M,int tentative){
                 }
             }
         }
-        if(verifier_existance_dicto(mot_saisie)==false && mot_saisie!="NO"){
+        if(verifier_existance_dicto(mot_saisie)==false && strcmp(mot_saisie,"NO")!=0){
             score-=4;//(-4) for a non existent word
         }
         tentative++;
@@ -362,7 +368,7 @@ char** Update_grille(char **M,int tentative){
     }
     else{
         printf("Désolé! Vous n'avez pas deviné le mot correct \n");
-        printf("Le mot correct était %s",Mot_aleatoire);
+        printf("Le mot correct était %s \n ",Mot_aleatoire);
     }
     return M;
 }
@@ -378,7 +384,7 @@ void menu(){
 }
 
 
-void main(){
+int main(){
     int n;
     char** M;
     int tentative=1;
@@ -393,7 +399,7 @@ void main(){
     case 1:
     printf("**********************WELCOME TO MOTUS*******************");
           start_game();
-          Afficher_grille();
+          //Afficher_grille();
           M=Initialiser_grille();
           Update_grille(M,tentative);
       break;
