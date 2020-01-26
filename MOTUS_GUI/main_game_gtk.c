@@ -3,9 +3,15 @@
 
 #include "optionwindowx.h"
 
-void show_best_score(GtkWidget *calculate, gpointer data){//shows the best score
+void show_best_score(){
+  GtkWidget *window2;
+  GtkWidget *label_max;
+  window2= gtk_window_new (GTK_WINDOW_TOPLEVEL);
+   gtk_window_set_title (GTK_WINDOW (window2), "MOTUS");
+   gtk_window_set_default_size (GTK_WINDOW (window2), 100, 100);
+   gtk_container_set_border_width(GTK_CONTAINER(window2), 40);//shows the best score
   FILE*fscore;
-  fscore=fopen("/Users/soufianehajazi/Desktop/Screen\ Shot\ 2020-01-23\ at\ 13.00.44.png","r");
+  fscore=fopen("/Users/soufianehajazi/Downloads/MOTUS-master\ 8/MOTUS_GUI/score.txt","r");
   int max=0;
   int num;
   while(!feof(fscore)){
@@ -17,9 +23,10 @@ void show_best_score(GtkWidget *calculate, gpointer data){//shows the best score
 
 }
 fclose(fscore);
-char buffer[32];
-snprintf(buffer, sizeof(buffer), "Your best score: %d", max);
-gtk_label_set_text(GTK_LABEL(max), buffer);
+label_max = gtk_label_new("Ton meilleur score :");
+gtk_container_add(GTK_WINDOW(window2), label_max);
+gtk_widget_show_all (window2);
+
 }
 
 
