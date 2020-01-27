@@ -59,7 +59,7 @@ static void menu (GtkApplication *app,
   gtk_container_add (GTK_CONTAINER (window), button_box);
 
   /* Chargement d'une image a partir d'un fichier */
-  image = gtk_image_new_from_file("/Users/soufianehajazi/Desktop/Screen\ Shot\ 2020-01-23\ at\ 13.00.44.png");
+  image = gtk_image_new_from_file("MOTUS_GTK_UPDATED/Screen Shot 2020-01-23 at 13.00.44.png");
   gtk_box_pack_start(GTK_BOX(button_box), image, FALSE, FALSE, 5);
 
 
