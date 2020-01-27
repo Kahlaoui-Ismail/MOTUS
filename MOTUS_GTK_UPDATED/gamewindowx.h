@@ -75,7 +75,7 @@ g_signal_connect(G_OBJECT(window), "destroy",
    label_1=gtk_label_new("Saisir Votre Mot");
    box=gtk_box_new(TRUE,2);
    gtk_box_set_baseline_position (GTK_BOX(box),GTK_BASELINE_POSITION_CENTER);
-   image = gtk_image_new_from_file("/Users/soufianehajazi/Desktop/Screen\ Shot\ 2020-01-23\ at\ 13.00.44.png");
+   image = gtk_image_new_from_file("MOTUS_GTK_UPDATED/Screen Shot 2020-01-23 at 13.00.44.png");
    gtk_box_pack_start(GTK_BOX(box), image, TRUE, TRUE, 5);
    gtk_box_pack_start(GTK_BOX(box),label_1,TRUE,TRUE,NULL);
    gtk_box_pack_start(GTK_BOX(box),Tried_word,TRUE,TRUE,NULL);
