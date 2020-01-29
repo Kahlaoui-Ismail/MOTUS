@@ -16,7 +16,7 @@
 #include <time.h>
 
 
-typedef enum {true, false} bool; // On va définir le type booléan pour faciliter la manipulation.
+//typedef enum {true, false} bool; // On va définir le type booléan pour faciliter la manipulation.
 
 typedef struct Clr{
     char* color;
@@ -40,7 +40,7 @@ void Timer1(int seconds); // le temps de réflexion en seconds
 
 
 
-bool validate(char *mot,int longeur); //cette fonction vérifie le mot saisi dans la grille
+//bool validate(char *mot,int longeur); //cette fonction vérifie le mot saisi dans la grille
     //renvoie TRUE si seulement si les 8 caractères sont alphabétiques
 
           
@@ -62,7 +62,7 @@ void Inserer_mot(int tentative,casemot** M);
 
 //void score(void);
 
-bool Verifier_existance_dicto(char* mot);
+//bool Verifier_existance_dicto(char* mot);
     //parcourir le dictionnaire et vérifier l'existance du mot proposé
    
 

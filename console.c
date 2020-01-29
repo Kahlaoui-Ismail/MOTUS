@@ -10,7 +10,7 @@ int z;
 char* Mot_aleatoire;
 int score=0;
 
-
+typedef enum {true, false} bool; 
  // On va définir le type booléan pour faciliter la manipulation.
 
 int best_score(){ //cherche dans un fichier le meilleur score enregistré dans les parties précédentes
@@ -412,9 +412,7 @@ int main(){
     int n=0;
     char** M;
     int tentative=1;
-    int k;
-    k=best_score();
-    printf("%d",k);
+
 
   menu();
  
