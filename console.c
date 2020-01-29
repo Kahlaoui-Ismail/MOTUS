@@ -14,29 +14,49 @@ int score=0;
  // On va définir le type booléan pour faciliter la manipulation.
 
 int best_score(){ //cherche dans un fichier le meilleur score enregistré dans les parties précédentes
-  FILE*fscore;
-  fscore=fopen("‎⁨./Scores/score.txt","r");
-  int max=0;
-  int num;
-  while(!feof(fscore)){
-  fscanf(fscore,"%d", &num);
-  
-  if(max<num){
-    max=num;
-  }
-}
-return max;
+    FILE *fp = NULL;
+    int max=0;
+    fp=fopen("./scores/score.txt","r");
+    if(fp==NULL){
+      printf("Error! opening file");
+    }
+    else{
+        int num;
+        while(!feof(fp)){
+            fscanf(fp,"%d",&num);
+            if(max<num){
+                max=num;
+            }
+        }
+        fclose(fp);
+    }
+    
+    return max;
 
 
 }
 
+void save_score(int newscore){ //cherche dans un fichier le meilleur score enregistré dans les parties précédentes
+    FILE *fp = NULL;
+    fp=fopen("./scores/score.txt","a+");
+    if(fp==NULL){
+      printf("Error! opening file");
+    }
+    else{
+        fprintf(fp,"%c",'\r');
+        fprintf(fp,"%d",newscore);
+        fclose(fp);
+    }
+
+
+}
 
 void start_game(){
     
     
     do{
         printf("\nFaites rentrer la taille du mot\n");
-        printf("\n1) 6letters       2) 7letters     3) 8letters\n4)  9letters       5) 10letters \n");
+        printf("\n1) 6letters       2) 7letters     3) 8letters\n4) 9letters       5) 10letters \n");
         scanf("%d",&x);}
     while(x<1 || x>5);
     x=x+5;
@@ -169,17 +189,21 @@ bool verifier_existance_dicto(char* mot_saisie){
             case 9 : filename="./Dictionnaires/Dictionnaire9.txt";break;
             case 10 : filename="./Dictionnaires/Dictionnaire10.txt";break;
     }
+    if(strcmp(mot_saisie,"NO")==0){
+        return true;
+    }
     fp1=fopen(filename,"r");
     if(fp1==NULL){
         printf("Error! opening file");
     }
-    temp=(char*)malloc(sizeof(char));
+    temp=(char*)malloc(x*sizeof(char));
     while(!feof(fp1)){
         fscanf(fp1, "%s",temp);
-        if(temp==mot_saisie){
+        if(strcmp(temp,mot_saisie)==0){
             return true;
         }
     }
+    printf("Attention! mot inexistant. \n");
     return false;
 }
     
@@ -357,13 +381,13 @@ char** Update_grille(char **M,int tentative){
                 }
             }
         }
-        if(verifier_existance_dicto(mot_saisie)==false && strcmp(mot_saisie,"NO")!=0){
+        if(verifier_existance_dicto(mot_saisie)==false || strcmp(mot_saisie,"NO")!=0){
             score-=4;//(-4) for a non existent word
         }
         tentative++;
     }while(tentative<8 && strcmp(mot_saisie, Mot_aleatoire)!=0);
-    if(tentative<8){
-        printf("Félicitaion! Vous avez deviné le mot correct");
+    if(tentative<8 || strcmp(mot_saisie, Mot_aleatoire)==0){
+        printf("Félicitaion! Vous avez deviné le mot correct\n");
         score+=6;
     }
     else{
@@ -385,29 +409,35 @@ void menu(){
 
 
 int main(){
-    int n;
+    int n=0;
     char** M;
     int tentative=1;
-  
-    
+    int k;
+    k=best_score();
+    printf("%d",k);
 
   menu();
  
+    
+    while(n!=3){
   printf("enter your choice:");
   scanf("%d",&n);
   switch(n){
     case 1:
+          score=0;
     printf("**********************WELCOME TO MOTUS*******************");
           start_game();
           //Afficher_grille();
           M=Initialiser_grille();
           Update_grille(M,tentative);
+          save_score(score);
       break;
     
-    case 2: printf("ur best score: %d",best_score());
+    case 2: printf("Ton meilleur score est: %d points \n",best_score());
             break;
     case 3:break;
     }
+}
 }
     
 
